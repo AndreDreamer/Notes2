@@ -4,8 +4,8 @@ import android.app.LauncherActivity
 
 class Note() : LauncherActivity.ListItem() {
     var id: Long = 0
-    var title: String = ""
-    var text: String = ""
+    lateinit var title: String
+    lateinit var text: String
 
     constructor(text: String,  title: String) : this(text) {
         this.title = title

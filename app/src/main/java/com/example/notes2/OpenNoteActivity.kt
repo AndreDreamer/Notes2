@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.notes2.MainActivity
 import com.example.notes2.Note
 
+
 class OpenNoteActivity : Activity() {
     lateinit var title: EditText
     lateinit var text: EditText

@@ -10,24 +10,24 @@ import android.widget.Button
 import android.widget.EditText
 
 class FloatingWidgetService : Service() {
-    private var mWindowManager: WindowManager? = null
-    private var mFloatingView: View? = null
-    var title: EditText? = null
-    var text: EditText? = null
-    var buttonOK: Button? = null
-    override fun onBind(intent: Intent): IBinder? {
-        return null
-    }
+    private lateinit var windowManager: WindowManager
+    private lateinit var viewNote: View
+    private lateinit var title: EditText
+    private lateinit var text: EditText
+    private lateinit var btnOK: Button
+    private val xCoordinateOfView: Int = 0
+    private val yCoordinateOfView: Int = 100
+
 
     override fun onCreate() {
         super.onCreate()
 
-
         //Inflate the floating view layout we created
-        mFloatingView = LayoutInflater.from(this).inflate(R.layout.layout_floating_widget, null)
-        buttonOK = mFloatingView!!.findViewById(R.id.buttonOKFlow)
-        title = mFloatingView!!.findViewById(R.id.editTitleFlow)
-        text = mFloatingView!!.findViewById(R.id.editTextFlow)
+        viewNote = LayoutInflater.from(this).inflate(R.layout.layout_floating_widget, null)
+        btnOK = viewNote.findViewById(R.id.buttonOKFlow)
+        title = viewNote.findViewById(R.id.editTitleFlow)
+        text = viewNote.findViewById(R.id.editTextFlow)
+
         val params1 = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -47,33 +47,33 @@ class FloatingWidgetService : Service() {
             PixelFormat.TRANSLUCENT
         )
         params1.gravity =
-            Gravity.TOP or Gravity.LEFT //Initially view will be added to top-left corner
-        params1.x = 0
-        params1.y = 100
+            Gravity.TOP or Gravity.START //Initially view will be added to top-left corner
+        params1.x = xCoordinateOfView
+        params1.y = yCoordinateOfView
 
         //Specify the view position
         params2.gravity =
-            Gravity.TOP or Gravity.LEFT //Initially view will be added to top-left corner
-        params2.x = 0
-        params2.y = 100
+            Gravity.TOP or Gravity.START //Initially view will be added to top-left corner
+        params2.x = xCoordinateOfView
+        params2.y = yCoordinateOfView
 
         //Add the view to the window
-        mWindowManager = getSystemService(WINDOW_SERVICE) as WindowManager
-        mWindowManager!!.addView(mFloatingView, params1)
+        windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+        windowManager.addView(viewNote, params1)
 
 
         //The root element of the collapsed view layout
-        val collapsedView = mFloatingView!!.findViewById<View>(R.id.collapse_view)
+        val collapsedView = viewNote.findViewById<View>(R.id.collapse_view)
         //The root element of the expanded view layout
-        val expandedView = mFloatingView!!.findViewById<View>(R.id.expanded_container)
+        val expandedView = viewNote.findViewById<View>(R.id.expanded_container)
         collapsedView.visibility = View.VISIBLE
         expandedView.visibility = View.GONE
-        buttonOK.setOnClickListener(View.OnClickListener {
+        btnOK.setOnClickListener {
             createNote()
             collapsedView.visibility = View.VISIBLE
             expandedView.visibility = View.GONE
-            mWindowManager!!.updateViewLayout(mFloatingView, params1)
-        })
+            windowManager.updateViewLayout(viewNote, params1)
+        }
         collapsedView.setOnClickListener {
             collapsedView.visibility = View.GONE
             expandedView.visibility = View.VISIBLE
@@ -89,7 +89,6 @@ class FloatingWidgetService : Service() {
             override fun onTouch(v: View, event: MotionEvent): Boolean {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
-
                         //remember the initial position.
                         initialX = params1.x
                         initialY = params1.y
@@ -102,17 +101,19 @@ class FloatingWidgetService : Service() {
                         return true
                     }
                     MotionEvent.ACTION_UP -> {
-                        val Xdiff = (event.rawX - initialTouchX).toInt()
-                        val Ydiff = (event.rawY - initialTouchY).toInt()
+                        val xDifference = (event.rawX - initialTouchX).toInt()
+                        val yDifference = (event.rawY - initialTouchY).toInt()
 
 
-                        //The check for Xdiff <10 && YDiff< 10 because sometime elements moves a little while clicking.
+                        //The check for xDifference <10 && yDifference< 10 because sometime elements moves a little while clicking.
                         //So that is click event.
-                        if (Xdiff < 10 && Ydiff < 10) {
+
+
+                        if (xDifference < 10 && yDifference < 10) {
                             if (isViewCollapsed) {
                                 collapsedView.visibility = View.GONE
                                 expandedView.visibility = View.VISIBLE
-                                mWindowManager!!.updateViewLayout(mFloatingView, params2)
+                                windowManager.updateViewLayout(viewNote, params2)
                             }
                         }
                         return true
@@ -125,7 +126,7 @@ class FloatingWidgetService : Service() {
                         params2.y = initialY + (event.rawY - initialTouchY).toInt()
 
                         //Update the layout with new X & Y coordinate
-                        mWindowManager!!.updateViewLayout(mFloatingView, params1)
+                        windowManager.updateViewLayout(viewNote, params1)
                         return true
                     }
                 }
@@ -164,7 +165,7 @@ class FloatingWidgetService : Service() {
                                 //and expanded view will become visible.
                                 collapsedView.visibility = View.GONE
                                 expandedView.visibility = View.VISIBLE
-                                mWindowManager!!.updateViewLayout(mFloatingView, params1)
+                                windowManager.updateViewLayout(viewNote, params1)
                             }
                         }
                         return true
@@ -178,7 +179,7 @@ class FloatingWidgetService : Service() {
 
 
                         //Update the layout with new X & Y coordinate
-                        mWindowManager!!.updateViewLayout(mFloatingView, params2)
+                        windowManager.updateViewLayout(viewNote, params2)
                         return true
                     }
                 }
@@ -188,25 +189,29 @@ class FloatingWidgetService : Service() {
     }
 
     private fun createNote() {
-        if (!text!!.text.toString().isEmpty()) {
-            var header = title!!.text.toString()
-            val plot = text!!.text.toString()
-            if (title!!.text.toString().isEmpty()) {
+        if (text.text.toString().isNotEmpty()) {
+            var header = title.text.toString()
+            val plot = text.text.toString()
+            if (title.text.toString().isEmpty()) {
                 header = if (plot.length > 15) plot.substring(0, 15) + "..." else plot
             }
             val note = Note(header, plot)
             MainActivity.notes.add(note)
             MainActivity.db.putNotes(MainActivity.notes)
         }
-        text!!.setText("")
-        title!!.setText("")
+        text.setText("")
+        title.setText("")
     }
 
     private val isViewCollapsed: Boolean
-        private get() = mFloatingView == null || mFloatingView!!.findViewById<View>(R.id.collapse_view).visibility == View.VISIBLE
+        get() =  viewNote.findViewById<View>(R.id.collapse_view).visibility == View.VISIBLE
 
     override fun onDestroy() {
         super.onDestroy()
-        if (mFloatingView != null) mWindowManager!!.removeView(mFloatingView)
+        windowManager.removeView(viewNote)
+    }
+
+    override fun onBind(p0: Intent?): IBinder? {
+       return null
     }
 }

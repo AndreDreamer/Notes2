@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Notes2</string>
+    <string name="app_name">Notes.</string>
+    <string name="enableBtn">Enable pop-up button</string>
+    <string name="latestNotes">Latest notes</string>
+    <string name="latestNote">Latest note</string>
+    <string name="addNewNote">Add new note</string>
+    <string name="hintForSearch">Search for note</string>
+    <string name="delete">delete</string>
+    <string name="info">info</string>
 </resources>

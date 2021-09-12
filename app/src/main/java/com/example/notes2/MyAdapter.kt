@@ -1,7 +1,6 @@
 package com.example.notes2
 
 import OpenNoteActivity
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import android.widget.PopupMenu
 import android.widget.TextView
 
 class MyAdapter( var context: Context, var notes: ArrayList<Note>) :
+
     BaseAdapter() {
     var inflatter: LayoutInflater = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
 
@@ -20,25 +20,24 @@ class MyAdapter( var context: Context, var notes: ArrayList<Note>) :
        return notes.size
     }
 
-    override fun getItem(p0: Int): Any {
-        return notes[p0]
+    override fun getItem(id: Int): Any {
+        return notes[id]
     }
 
-    override fun getItemId(p0: Int): Long {
-      return p0.toLong()
+    override fun getItemId(id: Int): Long {
+      return id.toLong()
     }
 
-    @SuppressLint("SetTextI18n", "ViewHolder")
-    override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
 
-        val vi: View? = p1
-        val title = vi?.findViewById<TextView>(R.id.title)
-        val text = vi?.findViewById<TextView>(R.id.text)
+    override fun getView(id: Int, view: View?, p2: ViewGroup?): View? {
+
+        val title = view?.findViewById<TextView>(R.id.title)
+        val text = view?.findViewById<TextView>(R.id.text)
 
         var textText = ""
         var spaceCounter = 0
-        for (i in notes[p0].text.indices) {
-            if (notes[p0].text[i] == '\n') spaceCounter++
+        for (i in notes[id].text.indices) {
+            if (notes[id].text[i] == '\n') spaceCounter++
             if (spaceCounter > 3) {
                 textText += "..."
                 break
@@ -47,29 +46,29 @@ class MyAdapter( var context: Context, var notes: ArrayList<Note>) :
                 textText += "..."
                 break
             }
-            textText += notes[p0].text[i]
+            textText += notes[id].text[i]
         }
         if (text != null) {
             text.text = textText
         }
 
-        if (notes[p0].title.length < 15) {
+        if (notes[id].title.length < 15) {
             if (title != null) {
-                title.text = notes[p0].title
+                title.text = notes[id].title
             }
         } else {
             if (title != null) {
-                title.text = notes[p0].title.substring(0, 15) + "..."
+                title.text = notes[id].title.substring(0, 15) + "..."
             }
         }
-        val button = vi.findViewById<ImageButton>(R.id.button)
+        val button = view?.findViewById<ImageButton>(R.id.button)
         //delete btn Event
-        button.setOnClickListener {
+        button?.setOnClickListener {
             val dropDownMenu = PopupMenu(context, button)
             dropDownMenu.menuInflater.inflate(R.menu.drop_down_menu, dropDownMenu.menu)
             dropDownMenu.setOnMenuItemClickListener { menuItem ->
                 if (menuItem.title == "delete") {
-                    notes.removeAt(p0)
+                    notes.removeAt(id)
                     MainActivity.db.putNotes(notes)
                     MainActivity.notes = notes
                     notifyDataSetChanged()
@@ -83,9 +82,9 @@ class MyAdapter( var context: Context, var notes: ArrayList<Note>) :
         }
 
         //note click event
-        vi?.setOnClickListener { openNote(p0) }
+        view?.setOnClickListener { openNote(id) }
 
-        return vi!!
+        return view
     }
 
     private fun openNote(id: Int) {
