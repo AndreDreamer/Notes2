@@ -7,12 +7,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 
-
-
 class OpenNoteActivity : Activity() {
     private lateinit var title: EditText
     private lateinit var text: EditText
-    private val countOfSymbolToCut : Int = 15
+    private val countOfSymbolToCut: Int = 15
     private var index = 0
 
 
@@ -27,7 +25,7 @@ class OpenNoteActivity : Activity() {
             title.hint = getString(R.string.editTitleHint)
             text.hint = getString(R.string.putNotesHint)
         } else {
-            val note: Note = MainActivity.notes.get(index)
+            val note: Note = MyDB.getNote(index)
             title.setText(note.title)
             text.setText(note.text)
         }
@@ -45,16 +43,19 @@ class OpenNoteActivity : Activity() {
             var header = title.text.toString()
             val plot = text.text.toString()
             if (title.text.toString().isEmpty()) {
-                header = if (plot.length > countOfSymbolToCut) plot.substring(0, countOfSymbolToCut) + "..." else plot
+                header = if (plot.length > countOfSymbolToCut) plot.substring(
+                    0,
+                    countOfSymbolToCut
+                ) + "..." else plot
             }
             if (index == -1) {
                 val note = Note(header, plot)
-                MainActivity.notes.add(note)
+                MyDB.addNote(note)
             } else {
                 val note = Note(header, plot)
-                MainActivity.notes.set(index, note)
+                MyDB.setNote(index,note)
             }
-            MainActivity.db.putNotes(MainActivity.notes)
+            //MyDB.setNotes
         }
         val myIntent = Intent(this, MainActivity::class.java)
         myIntent.putExtra("NoteID", -1)
@@ -71,7 +72,7 @@ class OpenNoteActivity : Activity() {
     override fun onStop() {
         super.onStop()
         active = false
-        if (!MainActivity.active && !active) {
+        if (!active) {
             // To prevent starting the service if the required permission is NOT granted.
             errorToast()
         }

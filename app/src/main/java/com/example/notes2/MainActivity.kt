@@ -1,9 +1,8 @@
 package com.example.notes2
 
-import OpenNoteActivity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
@@ -14,8 +13,6 @@ import android.widget.Toast
 class MainActivity : AppCompatActivity() {
 
     private var active = false
-    private lateinit var notes: ArrayList<Note>
-    private lateinit var dataBase: MyDB
     private lateinit var listView: ListView
     private lateinit var btnAddNote: Button
 
@@ -23,19 +20,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        askForSystemOverlayPermission()
-        refreshNotes()
+
 
         active = true
-        dataBase = MyDB(this)
+        MyDB.init(this)
         listView = findViewById(R.id.listView)
         btnAddNote = findViewById(R.id.addNote)
         btnAddNote.setOnClickListener {
             val myIntent = Intent(this, OpenNoteActivity::class.java)
-            myIntent.putExtra("NoteID", -1)
+            myIntent.putExtra(getString(R.string.keyNoteID), -1)
             startActivity(myIntent)
         }
-
+        askForSystemOverlayPermission()
+        refreshNotes()
         removeService()
     }
 
@@ -52,17 +49,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshNotes() {
-        notes = dataBase.getNotes()
-        listView.adapter = MyAdapter(this, notes)
+        listView.adapter = MyAdapter(this, MyDB.getNotes())
     }
 
     private fun askForSystemOverlayPermission() {
-
-        val intent = Intent(
-            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-            Uri.parse("package:$packageName")
-        )
-        startActivityForResult(intent, 123)
+        if (!Settings.canDrawOverlays(this)) {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName")
+            )
+            startActivityForResult(intent, 123)
+        }
     }
 
 

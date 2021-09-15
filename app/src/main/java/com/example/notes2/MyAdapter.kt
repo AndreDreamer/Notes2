@@ -1,6 +1,5 @@
 package com.example.notes2
 
-import OpenNoteActivity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -11,13 +10,14 @@ import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.TextView
 
-class MyAdapter( var context: Context, var notes: ArrayList<Note>) :
+class MyAdapter(var context: Context, var notes: ArrayList<Note>) :
 
     BaseAdapter() {
-    var inflatter: LayoutInflater = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
+    var inflatter: LayoutInflater =
+        (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
 
     override fun getCount(): Int {
-       return notes.size
+        return notes.size
     }
 
     override fun getItem(id: Int): Any {
@@ -25,7 +25,7 @@ class MyAdapter( var context: Context, var notes: ArrayList<Note>) :
     }
 
     override fun getItemId(id: Int): Long {
-      return id.toLong()
+        return id.toLong()
     }
 
 
@@ -69,8 +69,7 @@ class MyAdapter( var context: Context, var notes: ArrayList<Note>) :
             dropDownMenu.setOnMenuItemClickListener { menuItem ->
                 if (menuItem.title == "delete") {
                     notes.removeAt(id)
-                    MainActivity.db.putNotes(notes)
-                    MainActivity.notes = notes
+                    MyDB.removeNote(id)
                     notifyDataSetChanged()
                 }
                 if (menuItem.title == "info") {

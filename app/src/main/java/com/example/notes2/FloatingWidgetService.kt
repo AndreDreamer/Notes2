@@ -196,15 +196,14 @@ class FloatingWidgetService : Service() {
                 header = if (plot.length > 15) plot.substring(0, 15) + "..." else plot
             }
             val note = Note(header, plot)
-            MainActivity.notes.add(note)
-            MainActivity.db.putNotes(MainActivity.notes)
+            MyDB.addNote(note)
         }
         text.setText("")
         title.setText("")
     }
 
     private val isViewCollapsed: Boolean
-        get() =  viewNote.findViewById<View>(R.id.collapse_view).visibility == View.VISIBLE
+        get() = viewNote.findViewById<View>(R.id.collapse_view).visibility == View.VISIBLE
 
     override fun onDestroy() {
         super.onDestroy()
@@ -212,6 +211,6 @@ class FloatingWidgetService : Service() {
     }
 
     override fun onBind(p0: Intent?): IBinder? {
-       return null
+        return null
     }
 }

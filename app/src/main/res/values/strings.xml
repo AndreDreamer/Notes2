@@ -9,4 +9,5 @@
     <string name="info">info</string>
     <string name="editTitleHint">Edit title</string>
     <string name="putNotesHint">Put notes</string>
+    <string name="keyNoteID">NoteID</string>
 </resources>
