@@ -6,12 +6,13 @@ class Note() : LauncherActivity.ListItem() {
     var id: Long = 0
     lateinit var title: String
     lateinit var text: String
+    private val countOfSymbolToCut : Int = 6
 
     constructor(text: String,  title: String) : this(text) {
         this.title = title
     }
 
     constructor(text: String) : this() {
-        this.title = text.substring(0, 6) + " "
+        this.title = text.substring(0, countOfSymbolToCut) + " "
     }
 }
