@@ -2,7 +2,6 @@ package com.example.notes2
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
@@ -24,8 +23,6 @@ class MainActivity : AppCompatActivity() {
 
 
         active = true
-        MyDB.init(this)
-
 
         listView = findViewById(R.id.listView)
         listView.adapter = MyAdapter(this, MyDB.getNotes())
