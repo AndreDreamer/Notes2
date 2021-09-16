@@ -3,6 +3,7 @@ package com.example.notes2
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -42,6 +43,9 @@ class OpenNoteActivity : Activity() {
         if (!text.text.toString().isEmpty()) {
             var header = title.text.toString()
             val plot = text.text.toString()
+
+
+
             if (title.text.toString().isEmpty()) {
                 header = if (plot.length > countOfSymbolToCut) plot.substring(
                     0,
@@ -55,10 +59,9 @@ class OpenNoteActivity : Activity() {
                 val note = Note(header, plot)
                 MyDB.setNote(index,note)
             }
-            //MyDB.setNotes
         }
+
         val myIntent = Intent(this, MainActivity::class.java)
-        myIntent.putExtra("NoteID", -1)
         startActivity(myIntent)
         super.finish()
     }

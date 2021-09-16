@@ -1,8 +1,10 @@
 package com.example.notes2
 
+
 import android.content.Context
 import android.content.SharedPreferences
 import android.text.TextUtils
+import android.util.Log
 import java.util.ArrayList
 
 object MyDB {
@@ -22,6 +24,7 @@ object MyDB {
 
 
     fun addNote(note: Note) {
+        Log.d("LOG","Note was added")
         notes.add(note)
         putNotesToDB()
     }
@@ -40,6 +43,7 @@ object MyDB {
     }
 
     fun setNote(id: Int, note: Note) {
+        Log.d("LOG","Note was setted")
         notes[id] = note
         putNotesToDB()
     }
