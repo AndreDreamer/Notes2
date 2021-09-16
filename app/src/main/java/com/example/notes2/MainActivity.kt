@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
@@ -21,14 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         active = true
-
         listView = findViewById(R.id.listView)
         listView.adapter = MyAdapter(this, MyDB.getNotes())
-
         btnAddNote = findViewById(R.id.addNote)
-
         btnAddNote.setOnClickListener {
             val myIntent = Intent(this, OpenNoteActivity::class.java)
             myIntent.putExtra(getString(R.string.keyNoteID), -1)
@@ -36,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         }
         askForSystemOverlayPermission()
         removeService()
-        Log.d("LOG", "OnCreate")
     }
 
     private fun removeService() {
@@ -73,9 +67,7 @@ class MainActivity : AppCompatActivity() {
                 errorToast()
                 finish()
             }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
+        } else super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun errorToast() {

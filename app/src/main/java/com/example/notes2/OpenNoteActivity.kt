@@ -3,7 +3,6 @@ package com.example.notes2
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -11,7 +10,6 @@ import android.widget.Toast
 class OpenNoteActivity : Activity() {
     private lateinit var title: EditText
     private lateinit var text: EditText
-    private val countOfSymbolToCut: Int = 15
     private var index = 0
 
 
@@ -40,26 +38,33 @@ class OpenNoteActivity : Activity() {
     }
 
     override fun finish() {
-        if (!text.text.toString().isEmpty()) {
-            var header = title.text.toString()
-            val plot = text.text.toString()
 
-
-
-            if (title.text.toString().isEmpty()) {
-                header = if (plot.length > countOfSymbolToCut) plot.substring(
-                    0,
-                    countOfSymbolToCut
-                ) + "..." else plot
-            }
-            if (index == -1) {
-                val note = Note(header, plot)
-                MyDB.addNote(note)
-            } else {
-                val note = Note(header, plot)
-                MyDB.setNote(index,note)
-            }
+        val note = Note(title.text.toString(), text.text.toString())
+        if (index == -1) {
+            MyDB.addNote(note)
+        } else {
+            MyDB.setNote(index, note)
         }
+//        if (text.text.toString().isNotEmpty()) {
+//            var header = title.text.toString()
+//            val plot = text.text.toString()
+//
+//
+//
+//            if (title.text.toString().isEmpty()) {
+//                header = if (plot.length > countOfSymbolToCut) plot.substring(
+//                    0,
+//                    countOfSymbolToCut
+//                ) + "..." else plot
+//            }
+//            if (index == -1) {
+//                val note = Note(header, plot)
+//                MyDB.addNote(note)
+//            } else {
+//                val note = Note(header, plot)
+//                MyDB.setNote(index,note)
+//            }
+//        }
 
         val myIntent = Intent(this, MainActivity::class.java)
         startActivity(myIntent)

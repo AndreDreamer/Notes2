@@ -7,7 +7,7 @@ class Note(){
     lateinit var text: String
     private val countOfSymbolToCut : Int = 6
 
-    constructor(text: String,  title: String) : this() {
+    constructor(title: String, text: String ) : this() {
         this.title = title
         this.text = text
     }

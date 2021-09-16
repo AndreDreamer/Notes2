@@ -1,5 +1,6 @@
 package com.example.notes2
 
+import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Intent
 import android.graphics.PixelFormat
@@ -19,6 +20,7 @@ class FloatingWidgetService : Service() {
     private val yCoordinateOfView: Int = 100
 
 
+    @SuppressLint("InflateParams")
     override fun onCreate() {
         super.onCreate()
 
@@ -86,6 +88,7 @@ class FloatingWidgetService : Service() {
             private var initialY = 0
             private var initialTouchX = 0f
             private var initialTouchY = 0f
+            @SuppressLint("ClickableViewAccessibility")
             override fun onTouch(v: View, event: MotionEvent): Boolean {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
@@ -138,6 +141,7 @@ class FloatingWidgetService : Service() {
             private var initialY = 0
             private var initialTouchX = 0f
             private var initialTouchY = 0f
+            @SuppressLint("ClickableViewAccessibility")
             override fun onTouch(v: View, event: MotionEvent): Boolean {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
