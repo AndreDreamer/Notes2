@@ -13,17 +13,24 @@ class MyAdapter(private val context: Activity, private val notes: ArrayList<Note
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-
-        val view: View = if (convertView == null) {
+        val view: View
+        val holder: ViewHolder
+        if (convertView == null) {
             val inflater: LayoutInflater = LayoutInflater.from(context)
-            inflater.inflate(R.layout.list_item, parent, false)
+            view = inflater.inflate(R.layout.list_item, parent, false)
+            holder = ViewHolder()
+            holder.titleTextView = view.findViewById<TextView>(R.id.title)
+            holder.subtitleTextView = view.findViewById<TextView>(R.id.text)
+            holder.button = view.findViewById<Button>(R.id.button)
+            view.tag = holder
         } else {
-            convertView
+            view = convertView
+            holder = convertView.tag as ViewHolder
         }
 
-        val title = view.findViewById<TextView>(R.id.title)
-        val text = view.findViewById<TextView>(R.id.text)
-        val button = view.findViewById<Button>(R.id.button)
+        val title = holder.titleTextView
+        val text = holder.subtitleTextView
+        val button = holder.button
 
         title.text = notes[position].title
         text.text = notes[position].text
@@ -44,16 +51,20 @@ class MyAdapter(private val context: Activity, private val notes: ArrayList<Note
             }
             dropDownMenu.show()
         }
-
-        //note click event
         view.setOnClickListener { openNote(position) }
         return view
     }
 
+    private class ViewHolder {
+        lateinit var titleTextView: TextView
+        lateinit var subtitleTextView: TextView
+        lateinit var button: Button
+    }
 
     private fun openNote(id: Int) {
         val myIntent = Intent(context, OpenNoteActivity::class.java)
         myIntent.putExtra("NoteID", id)
         context.startActivity(myIntent)
     }
+
 }
