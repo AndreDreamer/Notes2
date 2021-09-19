@@ -1,34 +1,60 @@
 package com.example.notes2
 
+
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import android.text.TextUtils
 import java.util.ArrayList
 
-class MyDB(context: Context) {
-    private var preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+object MyDB {
 
-    fun putNotes(notes: ArrayList<Note>) {
-        val titles = emptyArray<String>()
-        val texts = emptyArray<String>()
+    private lateinit var preferences: SharedPreferences
+    private const val PREFS_NAME = "params"
+    private val notes: ArrayList<Note> = arrayListOf()
 
-        for (i in 0..notes.size) {
+    fun init(context: Context) {
+        preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val titles = TextUtils.split(preferences.getString("notes1", ""), "‚‗‚")
+        val texts = TextUtils.split(preferences.getString("notes2", ""), "‚‗‚")
+        for (i in titles.indices) {
+            notes.add(Note(titles[i], texts[i]))
+        }
+    }
+
+
+    fun addNote(note: Note) {
+        notes.add(note)
+        putNotesToDB()
+    }
+
+    fun removeNote(id: Int) {
+        notes.removeAt(id)
+        putNotesToDB()
+    }
+
+    fun getNote(id: Int): Note {
+        return notes[id]
+    }
+
+    fun getNotes(): ArrayList<Note> {
+        return notes
+    }
+
+    fun setNote(id: Int, note: Note) {
+        notes[id] = note
+        putNotesToDB()
+    }
+
+    private fun putNotesToDB() {
+
+        val titles = arrayOfNulls<String>(notes.size)
+        val texts = arrayOfNulls<String>(notes.size)
+
+        for (i in notes.indices) {
             titles[i] = notes[i].title
             texts[i] = notes[i].text
         }
         preferences.edit().putString("notes1", TextUtils.join("‚‗‚", titles)).apply()
         preferences.edit().putString("notes2", TextUtils.join("‚‗‚", texts)).apply()
-    }
-
-    fun getNotes(): ArrayList<Note> {
-        val notes = ArrayList<Note>()
-        val titles = TextUtils.split(preferences.getString("notes1", ""), "‚‗‚")
-        val texts = TextUtils.split(preferences.getString("notes2", ""), "‚‗‚")
-
-        for (i in 0..titles.size) {
-            notes.add( Note(titles[i], texts[i]))
-        }
-        return notes
     }
 }

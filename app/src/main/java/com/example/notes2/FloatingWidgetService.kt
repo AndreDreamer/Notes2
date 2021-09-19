@@ -1,5 +1,6 @@
 package com.example.notes2
 
+import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Intent
 import android.graphics.PixelFormat
@@ -19,6 +20,7 @@ class FloatingWidgetService : Service() {
     private val yCoordinateOfView: Int = 100
 
 
+    @SuppressLint("InflateParams")
     override fun onCreate() {
         super.onCreate()
 
@@ -86,6 +88,7 @@ class FloatingWidgetService : Service() {
             private var initialY = 0
             private var initialTouchX = 0f
             private var initialTouchY = 0f
+            @SuppressLint("ClickableViewAccessibility")
             override fun onTouch(v: View, event: MotionEvent): Boolean {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
@@ -138,6 +141,7 @@ class FloatingWidgetService : Service() {
             private var initialY = 0
             private var initialTouchX = 0f
             private var initialTouchY = 0f
+            @SuppressLint("ClickableViewAccessibility")
             override fun onTouch(v: View, event: MotionEvent): Boolean {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
@@ -196,15 +200,14 @@ class FloatingWidgetService : Service() {
                 header = if (plot.length > 15) plot.substring(0, 15) + "..." else plot
             }
             val note = Note(header, plot)
-            MainActivity.notes.add(note)
-            MainActivity.db.putNotes(MainActivity.notes)
+            MyDB.addNote(note)
         }
         text.setText("")
         title.setText("")
     }
 
     private val isViewCollapsed: Boolean
-        get() =  viewNote.findViewById<View>(R.id.collapse_view).visibility == View.VISIBLE
+        get() = viewNote.findViewById<View>(R.id.collapse_view).visibility == View.VISIBLE
 
     override fun onDestroy() {
         super.onDestroy()
@@ -212,6 +215,6 @@ class FloatingWidgetService : Service() {
     }
 
     override fun onBind(p0: Intent?): IBinder? {
-       return null
+        return null
     }
 }

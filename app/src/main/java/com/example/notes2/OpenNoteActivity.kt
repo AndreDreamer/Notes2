@@ -1,32 +1,30 @@
+package com.example.notes2
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.notes2.MainActivity
-import com.example.notes2.Note
-
 
 class OpenNoteActivity : Activity() {
-    lateinit var title: EditText
-    lateinit var text: EditText
-    var index = 0
+    private lateinit var title: EditText
+    private lateinit var text: EditText
+    private var index = 0
+    val NAME_OF_EXTRA : String = "NoteID"
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        active = true
         super.onCreate(savedInstanceState)
         setContentView(R.layout.open_note)
+        active = true
         title = findViewById(R.id.editTitle)
         text = findViewById(R.id.editText)
-        index = intent.getIntExtra("NoteID", 0)
+        index = intent.getIntExtra("NAME_OF_EXTRA", 0)
         if (index == -1) {
-            title.setHint("Edit title")
-            text.setHint("Put notes")
+            title.hint = getString(R.string.editTitleHint)
+            text.hint = getString(R.string.putNotesHint)
         } else {
-            val note: Note = MainActivity.notes.get(index)
+            val note: Note = MyDB.getNote(index)
             title.setText(note.title)
             text.setText(note.text)
         }
@@ -40,23 +38,15 @@ class OpenNoteActivity : Activity() {
     }
 
     override fun finish() {
-        if (!text!!.text.toString().isEmpty()) {
-            var header = title!!.text.toString()
-            val plot = text!!.text.toString()
-            if (title!!.text.toString().isEmpty()) {
-                header = if (plot.length > 15) plot.substring(0, 15) + "..." else plot
-            }
-            if (index == -1) {
-                val note = Note(header, plot)
-                MainActivity.notes.add(note)
-            } else {
-                val note = Note(header, plot)
-                MainActivity.notes.set(index, note)
-            }
-            MainActivity.db.putNotes(MainActivity.notes)
+
+        val note = Note(title.text.toString(), text.text.toString())
+        if (index == -1) {
+            MyDB.addNote(note)
+        } else {
+            MyDB.setNote(index, note)
         }
+
         val myIntent = Intent(this, MainActivity::class.java)
-        myIntent.putExtra("NoteID", -1)
         startActivity(myIntent)
         super.finish()
     }
@@ -70,18 +60,9 @@ class OpenNoteActivity : Activity() {
     override fun onStop() {
         super.onStop()
         active = false
-        if (!MainActivity.active && !active) {
+        if (!active) {
             // To prevent starting the service if the required permission is NOT granted.
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(this)) {
-                startService(
-                    Intent(
-                        this@OpenNoteActivity,
-                        FloatingWidgetService::class.java
-                    ).putExtra("activity_background", true)
-                )
-            } else {
-                errorToast()
-            }
+            errorToast()
         }
     }
 

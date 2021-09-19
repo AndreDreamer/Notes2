@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -13,14 +14,14 @@
         tools:ignore="UselessParent">
 
         <!--View while view is collapsed-->
-        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:id="@+id/collapse_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="visible"
+            tools:ignore="SpeakableTextPresentCheck">
 
 
             <LinearLayout
@@ -40,7 +41,6 @@
             android:layout_height="200dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@layout/search_field"
             android:orientation="vertical">
 
             <LinearLayout
@@ -51,7 +51,7 @@
                 <EditText
                     android:id="@+id/editTitleFlow"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
 
@@ -69,7 +69,7 @@
             <EditText
                 android:id="@+id/editTextFlow"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:ems="10"
                 android:hint="Put your note"
                 android:inputType="textMultiLine"

@@ -1,76 +1,48 @@
 package com.example.notes2
 
-import OpenNoteActivity
-import android.content.Context
+
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageButton
-import android.widget.PopupMenu
-import android.widget.TextView
+import android.widget.*
 
-class MyAdapter( var context: Context, var notes: ArrayList<Note>) :
+class MyAdapter(private val context: Activity, private val notes: ArrayList<Note>) :
+    ArrayAdapter<Note>(context, R.layout.list_item, notes) {
 
-    BaseAdapter() {
-    var inflatter: LayoutInflater = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
+     val NAME_OF_EXTRA : String = "NoteID"
 
-    override fun getCount(): Int {
-       return notes.size
-    }
-
-    override fun getItem(id: Int): Any {
-        return notes[id]
-    }
-
-    override fun getItemId(id: Int): Long {
-      return id.toLong()
-    }
-
-
-    override fun getView(id: Int, view: View?, p2: ViewGroup?): View? {
-
-        val title = view?.findViewById<TextView>(R.id.title)
-        val text = view?.findViewById<TextView>(R.id.text)
-
-        var textText = ""
-        var spaceCounter = 0
-        for (i in notes[id].text.indices) {
-            if (notes[id].text[i] == '\n') spaceCounter++
-            if (spaceCounter > 3) {
-                textText += "..."
-                break
-            }
-            if (i > 40) {
-                textText += "..."
-                break
-            }
-            textText += notes[id].text[i]
-        }
-        if (text != null) {
-            text.text = textText
-        }
-
-        if (notes[id].title.length < 15) {
-            if (title != null) {
-                title.text = notes[id].title
-            }
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val view: View
+        val holder: ViewHolder
+        if (convertView == null) {
+            val inflater: LayoutInflater = LayoutInflater.from(context)
+            view = inflater.inflate(R.layout.list_item, parent, false)
+            holder = ViewHolder()
+            holder.titleTextView = view.findViewById<TextView>(R.id.title)
+            holder.subtitleTextView = view.findViewById<TextView>(R.id.text)
+            holder.button = view.findViewById<Button>(R.id.button)
+            view.tag = holder
         } else {
-            if (title != null) {
-                title.text = notes[id].title.substring(0, 15) + "..."
-            }
+            view = convertView
+            holder = convertView.tag as ViewHolder
         }
-        val button = view?.findViewById<ImageButton>(R.id.button)
+
+        val title = holder.titleTextView
+        val text = holder.subtitleTextView
+        val button = holder.button
+
+        title.text = notes[position].title
+        text.text = notes[position].text
+
         //delete btn Event
-        button?.setOnClickListener {
+        button.setOnClickListener {
             val dropDownMenu = PopupMenu(context, button)
             dropDownMenu.menuInflater.inflate(R.menu.drop_down_menu, dropDownMenu.menu)
             dropDownMenu.setOnMenuItemClickListener { menuItem ->
                 if (menuItem.title == "delete") {
-                    notes.removeAt(id)
-                    MainActivity.db.putNotes(notes)
-                    MainActivity.notes = notes
+                    MyDB.removeNote(position)
                     notifyDataSetChanged()
                 }
                 if (menuItem.title == "info") {
@@ -80,16 +52,20 @@ class MyAdapter( var context: Context, var notes: ArrayList<Note>) :
             }
             dropDownMenu.show()
         }
-
-        //note click event
-        view?.setOnClickListener { openNote(id) }
-
+        view.setOnClickListener { openNote(position) }
         return view
+    }
+
+    private class ViewHolder {
+        lateinit var titleTextView: TextView
+        lateinit var subtitleTextView: TextView
+        lateinit var button: Button
     }
 
     private fun openNote(id: Int) {
         val myIntent = Intent(context, OpenNoteActivity::class.java)
-        myIntent.putExtra("NoteID", id)
+        myIntent.putExtra(NAME_OF_EXTRA, id)
         context.startActivity(myIntent)
     }
+
 }
