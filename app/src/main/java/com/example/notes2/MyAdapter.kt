@@ -11,6 +11,7 @@ import android.widget.*
 class MyAdapter(private val context: Activity, private val notes: ArrayList<Note>) :
     ArrayAdapter<Note>(context, R.layout.list_item, notes) {
 
+     val NAME_OF_EXTRA : String = "NoteID"
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view: View
@@ -63,7 +64,7 @@ class MyAdapter(private val context: Activity, private val notes: ArrayList<Note
 
     private fun openNote(id: Int) {
         val myIntent = Intent(context, OpenNoteActivity::class.java)
-        myIntent.putExtra("NoteID", id)
+        myIntent.putExtra(NAME_OF_EXTRA, id)
         context.startActivity(myIntent)
     }
 

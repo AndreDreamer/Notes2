@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.notes2">
 
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="TASKS" />
+    <!--documentation https://developer.android.com/reference/android/Manifest.permission#SYSTEM_ALERT_WINDOW-->
+
 
     <application
         android:name=".MyApp"
@@ -22,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="OpenNoteActivity">
+        <activity android:name="OpenNoteActivity"
+            android:screenOrientation="user">
 
         </activity>
     </application>

@@ -11,7 +11,7 @@ class OpenNoteActivity : Activity() {
     private lateinit var title: EditText
     private lateinit var text: EditText
     private var index = 0
-
+    val NAME_OF_EXTRA : String = "NoteID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +19,7 @@ class OpenNoteActivity : Activity() {
         active = true
         title = findViewById(R.id.editTitle)
         text = findViewById(R.id.editText)
-        index = intent.getIntExtra("NoteID", 0)
+        index = intent.getIntExtra("NAME_OF_EXTRA", 0)
         if (index == -1) {
             title.hint = getString(R.string.editTitleHint)
             text.hint = getString(R.string.putNotesHint)
@@ -45,26 +45,6 @@ class OpenNoteActivity : Activity() {
         } else {
             MyDB.setNote(index, note)
         }
-//        if (text.text.toString().isNotEmpty()) {
-//            var header = title.text.toString()
-//            val plot = text.text.toString()
-//
-//
-//
-//            if (title.text.toString().isEmpty()) {
-//                header = if (plot.length > countOfSymbolToCut) plot.substring(
-//                    0,
-//                    countOfSymbolToCut
-//                ) + "..." else plot
-//            }
-//            if (index == -1) {
-//                val note = Note(header, plot)
-//                MyDB.addNote(note)
-//            } else {
-//                val note = Note(header, plot)
-//                MyDB.setNote(index,note)
-//            }
-//        }
 
         val myIntent = Intent(this, MainActivity::class.java)
         startActivity(myIntent)
