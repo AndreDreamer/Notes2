@@ -8,6 +8,7 @@
     <string name="editTitleHint">Edit title</string>
     <string name="putNotesHint">Put notes</string>
     <string name="keyNoteID">NoteID</string>
-    <string name="contentDescriptionSettings">Settings button</string>
     <string name="addNote">+</string>
+    <string name="contentDescriptionSettings">Settings button</string>
+    <string name="contentDescriptionNoteOptions">Note options</string>
 </resources>

@@ -22,7 +22,7 @@ class MyAdapter(private val context: Activity, private val notes: ArrayList<Note
             holder = ViewHolder()
             holder.titleTextView = view.findViewById<TextView>(R.id.title)
             holder.subtitleTextView = view.findViewById<TextView>(R.id.text)
-            holder.button = view.findViewById<Button>(R.id.button)
+            holder.button = view.findViewById<ImageButton>(R.id.button)
             view.tag = holder
         } else {
             view = convertView
@@ -59,7 +59,7 @@ class MyAdapter(private val context: Activity, private val notes: ArrayList<Note
     private class ViewHolder {
         lateinit var titleTextView: TextView
         lateinit var subtitleTextView: TextView
-        lateinit var button: Button
+        lateinit var button: ImageButton
     }
 
     private fun openNote(id: Int) {
