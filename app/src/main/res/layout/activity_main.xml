@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBack"
+    android:background="@color/titleBack"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/contentBack"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/titleBack">
 
 
             <ImageButton
@@ -44,7 +45,7 @@
                 android:layout_marginEnd="8dp"
                 android:fontFamily="serif"
                 android:text="@string/app_name"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/appName"
                 android:textSize="46sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -60,8 +61,9 @@
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
                 android:text="@string/addNote"
-                android:textColor="@color/titleButtonTextColor"
+                android:textColor="@color/titleText"
                 android:textSize="48sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,7 +71,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="70dp">
 
             <EditText
                 android:id="@+id/editText2"
@@ -86,6 +88,7 @@
                 android:paddingLeft="20dp"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
+                android:textColorHint="@color/contentText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -96,11 +99,11 @@
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:divider="#00000000"
             android:dividerHeight="10dp"
-            tools:listitem="@layout/list_item"/>
+            tools:listitem="@layout/list_item" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

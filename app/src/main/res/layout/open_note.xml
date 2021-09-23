@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBack"
+    android:background="@color/contentBack"
     tools:context=".OpenNoteActivity">
 
     <LinearLayout
@@ -19,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@color/colorPrimary">
+            android:background="@color/titleBack">
 
 
             <Button
@@ -31,7 +31,7 @@
                 android:layout_marginEnd="4dp"
                 android:background="@color/transparent"
                 android:text="@string/addNote"
-                android:textColor="@color/titleButtonTextColor"
+                android:textColor="@color/titleText"
                 android:textSize="48sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -48,10 +48,7 @@
                 android:inputType="textPersonName"
                 android:paddingStart="8dp"
                 android:text="Name"
-                android:textColor="@color/titleButtonTextColor"
-                android:textColorHighlight="@color/titleButtonTextColor"
-                android:textColorHint="@color/titleButtonTextColor"
-                android:textColorLink="@color/titleButtonTextColor"
+                android:textColor="@color/titleText"
                 android:textCursorDrawable="@drawable/color_cursor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/buttonOK"
@@ -73,7 +70,9 @@
             android:hint="@string/addNewNote"
             android:inputType="textMultiLine"
             android:minHeight="100dp"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:textColor="@color/contentText"
+            android:textColorHint="@color/contentText" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

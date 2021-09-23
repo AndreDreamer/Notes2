@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#464A51</color>
-    <color name="colorPrimaryDark">#464A51</color>
-    <color name="colorAccent">#FDD369</color>
-    <color name="titleButtonTextColor">#fff</color>
-    <color name="colorFont">#454545</color>
-    <color name="mainBack">#F6F4E6</color>
-    <color name="primaryBack">#F3F0F0</color>
+
+    <color name="appName">#FDD369</color>
     <color name= "transparent">#00000000</color>
+
+    <color name="titleText">#fff</color>
+    <color name="titleBack">#464A51</color>
+
+    <color name="contentText">#464A51</color>
+    <color name="contentBack">#F6F4E6</color>
+    <color name="contentBackAccent">#FFFDF7</color>
 
 </resources>
