@@ -6,5 +6,7 @@
     <color name="titleButtonTextColor">#fff</color>
     <color name="colorFont">#454545</color>
     <color name="mainBack">#F6F4E6</color>
+    <color name="primaryBack">#F3F0F0</color>
     <color name= "transparent">#00000000</color>
+
 </resources>
