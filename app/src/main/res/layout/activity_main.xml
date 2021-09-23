@@ -19,18 +19,22 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp">
+            android:layout_height="80dp"
+            android:background="@color/colorPrimaryDark">
 
 
-            <Button
+            <ImageButton
                 android:id="@+id/buttonSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Button"
+                android:background="@color/transparent"
+                android:contentDescription="@string/contentDescriptionSettings"
+                android:paddingTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/stripes" />
 
             <TextView
                 android:id="@+id/textView"
@@ -38,7 +42,6 @@
                 android:layout_height="78dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="serif"
                 android:text="@string/app_name"
                 android:textColor="@color/colorAccent"
@@ -55,9 +58,10 @@
                 android:id="@+id/addNote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="4dp"
-                android:text="Button"
+                android:background="@color/transparent"
+                android:text="@string/addNote"
+                android:textColor="@color/titleButtonTextColor"
+                android:textSize="48sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     private var active = false
     private lateinit var listView: ListView
     private lateinit var btnAddNote: Button
-
+    val NAME_OF_EXTRA : String = "NoteID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         btnAddNote = findViewById(R.id.addNote)
         btnAddNote.setOnClickListener {
             val myIntent = Intent(this, OpenNoteActivity::class.java)
-            myIntent.putExtra(getString(R.string.keyNoteID), -1)
+            myIntent.putExtra(NAME_OF_EXTRA, -1)
             startActivity(myIntent)
         }
         askForSystemOverlayPermission()

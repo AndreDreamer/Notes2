@@ -19,7 +19,7 @@ class OpenNoteActivity : Activity() {
         active = true
         title = findViewById(R.id.editTitle)
         text = findViewById(R.id.editText)
-        index = intent.getIntExtra("NAME_OF_EXTRA", 0)
+        index = intent.getIntExtra(NAME_OF_EXTRA, 0)
         if (index == -1) {
             title.hint = getString(R.string.editTitleHint)
             text.hint = getString(R.string.putNotesHint)
