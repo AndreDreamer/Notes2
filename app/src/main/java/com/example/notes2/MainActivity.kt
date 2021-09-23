@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         active = false
-        errorToast()
         super.onStop()
     }
 

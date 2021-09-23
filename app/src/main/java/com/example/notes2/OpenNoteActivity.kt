@@ -60,10 +60,6 @@ class OpenNoteActivity : Activity() {
     override fun onStop() {
         super.onStop()
         active = false
-        if (!active) {
-            // To prevent starting the service if the required permission is NOT granted.
-            errorToast()
-        }
     }
 
     private fun errorToast() {
