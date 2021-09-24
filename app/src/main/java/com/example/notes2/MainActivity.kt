@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         active = true
+        listView.invalidateViews()
         removeService()
     }
 
