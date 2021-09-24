@@ -8,17 +8,21 @@ import android.provider.Settings
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
+import com.example.notes2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private var active = false
     private lateinit var listView: ListView
     private lateinit var btnAddNote: Button
-    val NAME_OF_EXTRA : String = "NoteID"
+    val NAME_OF_EXTRA: String = "NoteID"
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         active = true
         listView = findViewById(R.id.listView)
@@ -31,7 +35,11 @@ class MainActivity : AppCompatActivity() {
         }
         askForSystemOverlayPermission()
         removeService()
+
     }
+
+
+
 
     private fun removeService() {
         run { stopService(Intent(this@MainActivity, FloatingWidgetService::class.java)) }

@@ -45,9 +45,6 @@ class OpenNoteActivity : Activity() {
         } else {
             MyDB.setNote(index, note)
         }
-
-        val myIntent = Intent(this, MainActivity::class.java)
-        startActivity(myIntent)
         super.finish()
     }
 
