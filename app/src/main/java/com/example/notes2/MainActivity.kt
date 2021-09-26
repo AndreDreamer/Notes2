@@ -1,5 +1,6 @@
 package com.example.notes2
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -9,12 +10,14 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.notes2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var linearLayoutManager: LinearLayoutManager
     private var active = false
-    private lateinit var listView: ListView
+    private lateinit var listView: RecyclerView
     private lateinit var btnAddNote: ImageButton
     val NAME_OF_EXTRA: String = "NoteID"
     private lateinit var binding: ActivityMainBinding
@@ -24,11 +27,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-        active = true
+        linearLayoutManager = LinearLayoutManager(this)
         listView = findViewById(R.id.listView)
-        listView.adapter = MyAdapter(this, MyDB.getNotes())
+        listView.layoutManager = linearLayoutManager
+
+        listView.adapter = MyAdapter(MyDB.getNotes())
         btnAddNote = findViewById(R.id.addNote)
+        active = true
         btnAddNote.setOnClickListener {
             val myIntent = Intent(this, OpenNoteActivity::class.java)
             myIntent.putExtra(NAME_OF_EXTRA, -1)
@@ -40,17 +45,16 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun removeService() {
         run { stopService(Intent(this@MainActivity, FloatingWidgetService::class.java)) }
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
         active = true
-        listView.invalidateViews()
+        listView.adapter?.notifyDataSetChanged()
         removeService()
     }
 
