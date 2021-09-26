@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Toast
 import com.example.notes2.databinding.ActivityMainBinding
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private var active = false
     private lateinit var listView: ListView
-    private lateinit var btnAddNote: Button
+    private lateinit var btnAddNote: ImageButton
     val NAME_OF_EXTRA: String = "NoteID"
     private lateinit var binding: ActivityMainBinding
 

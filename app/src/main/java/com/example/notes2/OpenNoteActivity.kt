@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 
 class OpenNoteActivity : Activity() {
@@ -28,7 +29,7 @@ class OpenNoteActivity : Activity() {
             title.setText(note.title)
             text.setText(note.text)
         }
-        val ok = findViewById<Button>(R.id.buttonOK)
+        val ok = findViewById<ImageButton>(R.id.buttonOK)
         ok.setOnClickListener { finish() }
         removeService()
     }

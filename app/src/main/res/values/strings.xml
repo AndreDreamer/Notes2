@@ -11,4 +11,5 @@
     <string name="addNote">+</string>
     <string name="contentDescriptionSettings">Settings button</string>
     <string name="contentDescriptionNoteOptions">Note options</string>
+    <string name="contentDescriptionAddNote">Add note button</string>
 </resources>
