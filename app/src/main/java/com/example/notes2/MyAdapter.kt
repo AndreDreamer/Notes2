@@ -1,9 +1,7 @@
 package com.example.notes2
 
 
-import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,46 +83,3 @@ class MyAdapter(private val notes: ArrayList<Note>) : RecyclerView.Adapter<MyAda
 
 }
 
-
-//override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-//    val view: View
-//    val holder: MyAdapter.ViewHolder
-//    if (convertView == null) {
-//        val inflater: LayoutInflater = LayoutInflater.from(context)
-//        view = inflater.inflate(R.layout.list_item, parent, false)
-//        holder = MyAdapter.ViewHolder()
-//        holder.titleTextView = view.findViewById<TextView>(R.id.title)
-//        holder.subtitleTextView = view.findViewById<TextView>(R.id.text)
-//        holder.button = view.findViewById<ImageButton>(R.id.button)
-//        view.tag = holder
-//    } else {
-//        view = convertView
-//        holder = convertView.tag as MyAdapter.ViewHolder
-//    }
-//
-//    val title = holder.titleTextView
-//    val text = holder.subtitleTextView
-//    val button = holder.button
-//
-//    title.text = notes[position].title
-//    text.text = notes[position].text
-//
-//    //delete btn Event
-//    button.setOnClickListener {
-//        val dropDownMenu = PopupMenu(context, button)
-//        dropDownMenu.menuInflater.inflate(R.menu.drop_down_menu, dropDownMenu.menu)
-//        dropDownMenu.setOnMenuItemClickListener { menuItem ->
-//            if (menuItem.title == "delete") {
-//                MyDB.removeNote(position)
-//                notifyDataSetChanged()
-//            }
-//            if (menuItem.title == "info") {
-//                //todo info menu
-//            }
-//            true
-//        }
-//        dropDownMenu.show()
-//    }
-//    view.setOnClickListener { openNote(position) }
-//    return view
-//}

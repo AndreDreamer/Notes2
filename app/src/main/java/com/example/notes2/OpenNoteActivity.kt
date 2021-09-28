@@ -12,7 +12,7 @@ class OpenNoteActivity : Activity() {
     private lateinit var title: EditText
     private lateinit var text: EditText
     private var index = 0
-    val NAME_OF_EXTRA : String = "NoteID"
+    private val NAME_OF_EXTRA : String = "NoteID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +46,11 @@ class OpenNoteActivity : Activity() {
         } else {
             MyDB.setNote(index, note)
         }
+        Intent
         super.finish()
     }
+
+
 
     override fun onResume() {
         super.onResume()

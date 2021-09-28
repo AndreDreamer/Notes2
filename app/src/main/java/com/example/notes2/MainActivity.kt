@@ -6,9 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Button
 import android.widget.ImageButton
-import android.widget.ListView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -57,6 +55,8 @@ class MainActivity : AppCompatActivity() {
         listView.adapter?.notifyDataSetChanged()
         removeService()
     }
+
+   
 
     private fun askForSystemOverlayPermission() {
         if (!Settings.canDrawOverlays(this)) {
