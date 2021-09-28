@@ -5,13 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 
 class OpenNoteActivity : Activity() {
     private lateinit var title: EditText
     private lateinit var text: EditText
     private var index = 0
-    val NAME_OF_EXTRA : String = "NoteID"
+    private val NAME_OF_EXTRA : String = "NoteID"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +20,7 @@ class OpenNoteActivity : Activity() {
         active = true
         title = findViewById(R.id.editTitle)
         text = findViewById(R.id.editText)
-        index = intent.getIntExtra("NAME_OF_EXTRA", 0)
+        index = intent.getIntExtra(NAME_OF_EXTRA, 0)
         if (index == -1) {
             title.hint = getString(R.string.editTitleHint)
             text.hint = getString(R.string.putNotesHint)
@@ -28,7 +29,7 @@ class OpenNoteActivity : Activity() {
             title.setText(note.title)
             text.setText(note.text)
         }
-        val ok = findViewById<Button>(R.id.buttonOK)
+        val ok = findViewById<ImageButton>(R.id.buttonOK)
         ok.setOnClickListener { finish() }
         removeService()
     }
@@ -45,11 +46,11 @@ class OpenNoteActivity : Activity() {
         } else {
             MyDB.setNote(index, note)
         }
-
-        val myIntent = Intent(this, MainActivity::class.java)
-        startActivity(myIntent)
+        Intent
         super.finish()
     }
+
+
 
     override fun onResume() {
         super.onResume()
@@ -60,10 +61,6 @@ class OpenNoteActivity : Activity() {
     override fun onStop() {
         super.onStop()
         active = false
-        if (!active) {
-            // To prevent starting the service if the required permission is NOT granted.
-            errorToast()
-        }
     }
 
     private fun errorToast() {
