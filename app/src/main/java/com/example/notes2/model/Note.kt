@@ -1,4 +1,4 @@
-package com.example.notes2
+package com.example.notes2.model
 
 
 class Note(){
