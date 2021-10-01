@@ -37,10 +37,10 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
-        with(binding) {
-            listView.adapter?.notifyDataSetChanged()
-        }
+        binding.listView.adapter?.notifyDataSetChanged()
+
     }
+
     companion object {
         private const val NOTE_KEY = "NoteID"
     }

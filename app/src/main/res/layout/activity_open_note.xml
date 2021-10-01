@@ -41,6 +41,7 @@ tools:context=".OpenNoteActivity">
         android:layout_marginEnd="16dp"
         android:adjustViewBounds="true"
         android:background="@color/transparent"
+        android:contentDescription="@string/contentDescriptionAddNote"
         android:scaleType="fitCenter"
         android:src="@drawable/plus"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,20 +50,22 @@ tools:context=".OpenNoteActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<EditText
-    android:id="@+id/editText"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:background="@drawable/rounded_background"
-    android:ems="10"
-    android:gravity="start|top"
-    android:hint="@string/addNewNote"
-    android:importantForAutofill="no"
-    android:inputType="textMultiLine"
-    android:minHeight="100dp"
-    android:padding="8dp"
-    android:textColor="@color/contentText"
-    android:textColorHint="@color/contentText" />
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_background"
+        android:cursorVisible="true"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/addNewNote"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:minHeight="100dp"
+        android:padding="8dp"
+        android:textColor="@color/contentText"
+        android:textColorHint="@color/contentText"
+        android:textCursorDrawable="@drawable/color_cursor" />
 
 </LinearLayout>

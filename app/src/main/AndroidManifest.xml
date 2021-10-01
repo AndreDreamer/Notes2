@@ -27,7 +27,8 @@
             </intent-filter>
         </activity>
         <activity android:name="OpenNoteActivity"
-            android:screenOrientation="user">
+            android:screenOrientation="user"
+            android:windowSoftInputMode="stateAlwaysVisible">
 
         </activity>
     </application>

@@ -1,14 +1,9 @@
 package com.example.notes2
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.ImageButton
-import com.example.notes2.databinding.ActivityMainBinding
 import com.example.notes2.databinding.ActivityOpenNoteBinding
 import com.example.notes2.model.Note
-import com.example.notes2.ui.FloatingWidgetService
 
 class OpenNoteActivity : Activity() {
     private lateinit var binding: ActivityOpenNoteBinding
@@ -26,6 +21,7 @@ class OpenNoteActivity : Activity() {
     private fun setupViews() {
         with(binding) {
             val index = intent.getIntExtra(NOTE_KEY, 0)
+
             if (index == -1) {
                 editTitle.hint = getString(R.string.editTitleHint)
                 editText.hint = getString(R.string.putNotesHint)
@@ -34,6 +30,7 @@ class OpenNoteActivity : Activity() {
                 editTitle.setText(note.title)
                 editText.setText(note.text)
             }
+            editText.requestFocus()
             buttonOK.setOnClickListener { finish(index) }
         }
     }
