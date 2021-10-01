@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
-    android:background="@drawable/rounded_layout"
+    android:background="@drawable/rounded_background"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout

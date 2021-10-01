@@ -4,7 +4,7 @@ package com.example.notes2
 import android.content.Context
 import android.content.SharedPreferences
 import android.text.TextUtils
-import android.util.Log
+import com.example.notes2.model.Note
 import java.util.ArrayList
 
 object MyDB {

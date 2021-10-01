@@ -1,4 +1,4 @@
-package com.example.notes2
+package com.example.notes2.ui
 
 
 import android.content.Intent
@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notes2.MyDB
+import com.example.notes2.OpenNoteActivity
+import com.example.notes2.R
+import com.example.notes2.model.Note
 
 class MyAdapter(private val notes: ArrayList<Note>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
@@ -26,8 +30,8 @@ class MyAdapter(private val notes: ArrayList<Note>) : RecyclerView.Adapter<MyAda
             dropDownMenu.setOnMenuItemClickListener { menuItem ->
                 if (menuItem.title == "delete") {
                     MyDB.removeNote(position)
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, notes.size);
+                    notifyItemRemoved(position)
+                    notifyItemRangeChanged(position, notes.size)
                 }
                 if (menuItem.title == "info") {
                     //todo info menu
@@ -73,7 +77,7 @@ class MyAdapter(private val notes: ArrayList<Note>) : RecyclerView.Adapter<MyAda
         }
 
         companion object {
-            private val NOTE_KEY = "NoteID"
+            private const val NOTE_KEY = "NoteID"
         }
     }
 
