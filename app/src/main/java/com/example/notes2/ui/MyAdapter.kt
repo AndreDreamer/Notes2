@@ -64,10 +64,27 @@ class MyAdapter(private val notes: ArrayList<Note>) : RecyclerView.Adapter<MyAda
             button = view.findViewById(R.id.button)
             titleTextView.text = note.title
             subtitleTextView.text = note.text
-
-
+            normalizeText(note)
         }
 
+        private fun normalizeText(note: Note) {
+            var textText = ""
+            var spaceCounter = 0
+            for (i in note.text.indices) {
+                if (note.text[i] == '\n') spaceCounter++
+                if (spaceCounter > COUNT_OF_SPACE_TO_CUT) {
+                    textText += "..."
+                    break
+                }
+                if (i > COUNT_OF_SYMBOLS_TO_CUT) {
+                    textText += "..."
+                    break
+                }
+                textText += note.text[i]
+            }
+            subtitleTextView.text = textText
+
+        }
 
         override fun onClick(v: View?) {
             val context = itemView.context
@@ -78,6 +95,8 @@ class MyAdapter(private val notes: ArrayList<Note>) : RecyclerView.Adapter<MyAda
 
         companion object {
             private const val NOTE_KEY = "NoteID"
+            private const val COUNT_OF_SPACE_TO_CUT = 3
+            private const val COUNT_OF_SYMBOLS_TO_CUT = 40
         }
     }
 

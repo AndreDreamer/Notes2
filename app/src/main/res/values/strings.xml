@@ -1,15 +1,17 @@
 <resources>
     <string name="app_name">Notes.</string>
     <string name="enableBtn">Enable pop-up button</string>
-    <string name="addNewNote">Add new note</string>
+
     <string name="hintForSearch">Search for note</string>
+    <string name="editTitleHint">Put title</string>
+    <string name="editTextHint">Put notes</string>
+
     <string name="delete">delete</string>
     <string name="info">info</string>
-    <string name="editTitleHint">Edit title</string>
-    <string name="putNotesHint">Put notes</string>
-    <string name="keyNoteID">NoteID</string>
     <string name="addNote">+</string>
+
     <string name="contentDescriptionSettings">Settings button</string>
     <string name="contentDescriptionNoteOptions">Note options</string>
     <string name="contentDescriptionAddNote">Add note button</string>
+
 </resources>
