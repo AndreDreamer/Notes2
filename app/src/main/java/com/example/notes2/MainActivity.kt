@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
+        binding.listView.requestFocus()
         binding.listView.adapter?.notifyDataSetChanged()
 
     }
