@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
                 myIntent.putExtra(NOTE_KEY, -1)
                 startActivity(myIntent)
             }
+
+            buttonSettings.setOnClickListener {
+                throw RuntimeException("Test Crash") // Force a crash for Crashlytics and fun
+            }
         }
     }
 
