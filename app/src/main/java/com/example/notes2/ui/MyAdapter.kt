@@ -9,7 +9,6 @@ import android.widget.*
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes2.MyDB
-import com.example.notes2.OpenNoteActivity
 import com.example.notes2.R
 import com.example.notes2.model.Note
 
@@ -87,10 +86,11 @@ class MyAdapter(private val notes: ArrayList<Note>) : RecyclerView.Adapter<MyAda
         }
 
         override fun onClick(v: View?) {
-            val context = itemView.context
-            val myIntent = Intent(context, OpenNoteActivity::class.java)
-            myIntent.putExtra(NOTE_KEY, adapterPosition)
-            context.startActivity(myIntent)
+            //CHANGE FRAGMENT
+//            val context = itemView.context
+//            val myIntent = Intent(context, OpenNoteActivity::class.java)
+//            myIntent.putExtra(NOTE_KEY, adapterPosition)
+//            context.startActivity(myIntent)
         }
 
         companion object {
