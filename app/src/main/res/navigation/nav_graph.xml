@@ -26,5 +26,9 @@
         <action
             android:id="@+id/action_openNoteScreenFragment_to_mainScreenFragment2"
             app:destination="@id/mainScreenFragment" />
+        <argument
+            android:name="NOTE_ID"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 </navigation>
