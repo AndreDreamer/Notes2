@@ -48,8 +48,4 @@ class MainScreenFragment : Fragment() {
         binding.listView.requestFocus()
         binding.listView.adapter?.notifyDataSetChanged()
     }
-
-    companion object {
-        private const val NOTE_KEY = "NoteID"
-    }
 }

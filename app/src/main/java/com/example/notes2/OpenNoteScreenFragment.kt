@@ -5,14 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.notes2.databinding.FragmentMainScreenBinding
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.notes2.databinding.FragmentOpenNoteScreenBinding
 import com.example.notes2.model.Note
 
 class OpenNoteScreenFragment : Fragment() {
     private lateinit var binding: FragmentOpenNoteScreenBinding
-
+    private val args: OpenNoteScreenFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,18 +26,19 @@ class OpenNoteScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            //val index = intent.getIntExtra(NOTE_KEY, 0)
+            val index = args.noteid
 
-//            if (index == -1) {
-//                editTitle.hint = getString(R.string.editTitleHint)
-//                editText.hint = getString(R.string.editTitleHint)
-//            } else {
-//                val note: Note = MyDB.getNote(index)
-//                editTitle.setText(note.title)
-//                editText.setText(note.text)
-//            }
-//            editText.requestFocus()
-//            buttonOK.setOnClickListener { finish(index) }
+            //check for def value ( new note )
+            if (index == -1) {
+                editTitle.hint = getString(R.string.editTitleHint)
+                editText.hint = getString(R.string.editTitleHint)
+            } else {
+                val note: Note = MyDB.getNote(index)
+                editTitle.setText(note.title)
+                editText.setText(note.text)
+            }
+            editText.requestFocus()
+            buttonOK.setOnClickListener { finish(index) }
         }
     }
 
@@ -61,12 +63,16 @@ class OpenNoteScreenFragment : Fragment() {
                     MyDB.setNote(index, note)
                 }
             }
+            val action =
+                OpenNoteScreenFragmentDirections.actionOpenNoteScreenFragmentToMainScreenFragment()
+            editTitle.findNavController().navigate(action)
+
+
         }
-        // to main fragment
+
     }
 
     companion object {
-        private const val NOTE_KEY = "NoteID"
         private const val COUNT_OF_SYMBOL_FOR_CUT = 15
     }
 }

@@ -13,7 +13,11 @@
         <action
             android:id="@+id/action_mainScreenFragment_to_openNoteScreenFragment"
             app:destination="@id/openNoteScreenFragment"
-            app:launchSingleTop="false" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="false"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/openNoteScreenFragment"
@@ -22,10 +26,11 @@
         tools:layout="@layout/fragment_open_note_screen" >
         <action
             android:id="@+id/action_openNoteScreenFragment_to_mainScreenFragment"
-            app:destination="@id/mainScreenFragment" />
-        <action
-            android:id="@+id/action_openNoteScreenFragment_to_mainScreenFragment2"
-            app:destination="@id/mainScreenFragment" />
+            app:destination="@id/mainScreenFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <argument
             android:name="NOTE_ID"
             app:argType="integer"
