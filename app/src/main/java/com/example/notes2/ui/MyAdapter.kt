@@ -1,15 +1,13 @@
 package com.example.notes2.ui
 
-
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.LayoutRes
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes2.MyDB
-import com.example.notes2.OpenNoteActivity
 import com.example.notes2.R
 import com.example.notes2.model.Note
 
@@ -87,14 +85,14 @@ class MyAdapter(private val notes: ArrayList<Note>) : RecyclerView.Adapter<MyAda
         }
 
         override fun onClick(v: View?) {
-            val context = itemView.context
-            val myIntent = Intent(context, OpenNoteActivity::class.java)
-            myIntent.putExtra(NOTE_KEY, adapterPosition)
-            context.startActivity(myIntent)
+            val action =
+                MainScreenFragmentDirections.actionMainScreenFragmentToOpenNoteScreenFragment()
+            action.noteid = adapterPosition
+            v?.findNavController()?.navigate(action)
+
         }
 
         companion object {
-            private const val NOTE_KEY = "NoteID"
             private const val COUNT_OF_SPACE_TO_CUT = 3
             private const val COUNT_OF_SYMBOLS_TO_CUT = 40
         }

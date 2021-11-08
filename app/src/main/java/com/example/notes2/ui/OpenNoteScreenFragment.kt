@@ -1,26 +1,35 @@
-package com.example.notes2
+package com.example.notes2.ui
 
-import android.app.Activity
 import android.os.Bundle
-import com.example.notes2.databinding.ActivityOpenNoteBinding
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.notes2.MyDB
+import com.example.notes2.R
+import com.example.notes2.databinding.FragmentOpenNoteScreenBinding
 import com.example.notes2.model.Note
 
-class OpenNoteActivity : Activity() {
-    private lateinit var binding: ActivityOpenNoteBinding
+class OpenNoteScreenFragment : Fragment() {
+    private lateinit var binding: FragmentOpenNoteScreenBinding
+    private val args: OpenNoteScreenFragmentArgs by navArgs()
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityOpenNoteBinding.inflate(layoutInflater)
-        setupViews()
-        setContentView(binding.root)
-
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentOpenNoteScreenBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    private fun setupViews() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            val index = intent.getIntExtra(NOTE_KEY, 0)
+            val index = args.noteid
 
+            //check for def value ( new note )
             if (index == -1) {
                 editTitle.hint = getString(R.string.editTitleHint)
                 editText.hint = getString(R.string.editTitleHint)
@@ -33,7 +42,6 @@ class OpenNoteActivity : Activity() {
             buttonOK.setOnClickListener { finish(index) }
         }
     }
-
 
     private fun finish(index: Int) {
         //check for fields
@@ -56,12 +64,16 @@ class OpenNoteActivity : Activity() {
                     MyDB.setNote(index, note)
                 }
             }
+            val action =
+               OpenNoteScreenFragmentDirections.actionOpenNoteScreenFragmentToMainScreenFragment()
+            editTitle.findNavController().navigate(action)
+
+
         }
-        super.finish()
+
     }
 
     companion object {
-        private const val NOTE_KEY = "NoteID"
         private const val COUNT_OF_SYMBOL_FOR_CUT = 15
     }
 }
