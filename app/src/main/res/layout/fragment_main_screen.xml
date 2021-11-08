@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainScreenFragment">
+    tools:context=".ui.MainScreenFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,18 +22,18 @@
 
             <ImageButton
                 android:id="@+id/buttonSettings"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="16dp"
                 android:adjustViewBounds="false"
                 android:background="@color/transparent"
                 android:contentDescription="@string/contentDescriptionSettings"
                 android:foregroundGravity="center"
                 android:scaleType="fitXY"
-                android:src="@drawable/options" />
+                android:src="@drawable/options"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView"
@@ -55,17 +55,17 @@
 
             <ImageButton
                 android:id="@+id/buttonAddNote"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/plus"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
                 android:adjustViewBounds="true"
                 android:background="@color/transparent"
                 android:contentDescription="@string/contentDescriptionAddNote"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/plus" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

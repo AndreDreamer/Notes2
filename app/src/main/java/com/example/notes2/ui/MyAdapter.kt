@@ -1,7 +1,5 @@
 package com.example.notes2.ui
 
-
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +7,6 @@ import android.widget.*
 import androidx.annotation.LayoutRes
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notes2.MainScreenFragmentDirections
 import com.example.notes2.MyDB
 import com.example.notes2.R
 import com.example.notes2.model.Note

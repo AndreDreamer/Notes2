@@ -1,13 +1,14 @@
-package com.example.notes2
+package com.example.notes2.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.notes2.MyDB
+import com.example.notes2.R
 import com.example.notes2.databinding.FragmentOpenNoteScreenBinding
 import com.example.notes2.model.Note
 
@@ -64,7 +65,7 @@ class OpenNoteScreenFragment : Fragment() {
                 }
             }
             val action =
-                OpenNoteScreenFragmentDirections.actionOpenNoteScreenFragmentToMainScreenFragment()
+               OpenNoteScreenFragmentDirections.actionOpenNoteScreenFragmentToMainScreenFragment()
             editTitle.findNavController().navigate(action)
 
 
