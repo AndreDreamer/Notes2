@@ -8,7 +8,6 @@ import com.example.notes2.model.Note
 import java.util.ArrayList
 
 object MyDB {
-
     private lateinit var preferences: SharedPreferences
     private const val PREFS_NAME = "params"
     private val notes: ArrayList<Note> = arrayListOf()
